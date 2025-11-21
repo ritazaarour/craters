@@ -27,7 +27,7 @@ function parseCraterRow(d) {
 Promise.all([
   d3.csv("data/survived_craters_mare.csv", parseCraterRow),
   d3.csv("data/erased_craters_mare.csv", parseCraterRow)
-]).then(([survMare, erasedMare, survNon, erasedNon]) => {
+]).then(([survMare, erasedMare]) => {
   // Compute global max diameter for slider range
   const allDiameters = [
     ...survMare,

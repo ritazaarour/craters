@@ -16,9 +16,6 @@ const tooltip = d3.select("#tooltip");
 function parseCraterRow(d) {
   let lon = +d.Longitude;
 
-  lon = lon - 180;
-  if (lon < -180) lon += 360;
-
   return {
     lon,
     lat: +d.Latitude,
@@ -100,11 +97,10 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
     // geojson outline
   d3.json("mare_imbrium.geojson").then(region => {
     const feature = region.features ? region.features[0] : region;
-
-    feature.geometry.coordinates[0] = feature.geometry.coordinates[0].map(([lon, lat]) => {
-      if (lon > 180) {
-        lon = lon - 360;
-      }
+    
+    feature.geometry.coordinates[0] =
+    feature.geometry.coordinates[0].map(([lon, lat]) => {
+      if (lon > 180) lon = lon - 360;   // correct transform
       return [lon, lat];
     });
 

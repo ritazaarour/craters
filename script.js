@@ -31,9 +31,7 @@ Promise.all([
   // Compute global max diameter for slider range
   const allDiameters = [
     ...survMare,
-    ...erasedMare,
-    ...survNon,
-    ...erasedNon
+    ...erasedMare
   ].map(d => d.diameter);
 
   const maxDiameter = d3.max(allDiameters);

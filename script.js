@@ -26,9 +26,7 @@ function parseCraterRow(d) {
 // Load all four CSVs
 Promise.all([
   d3.csv("data/survived_craters_mare.csv", parseCraterRow),
-  d3.csv("data/erased_craters_mare.csv", parseCraterRow),
-  d3.csv("data/survived_craters_non_mare.csv", parseCraterRow),
-  d3.csv("data/erased_craters_non_mare.csv", parseCraterRow)
+  d3.csv("data/erased_craters_mare.csv", parseCraterRow)
 ]).then(([survMare, erasedMare, survNon, erasedNon]) => {
   // Compute global max diameter for slider range
   const allDiameters = [
@@ -52,13 +50,13 @@ Promise.all([
     erasedData: erasedMare,
     prefix: "mare"
   });
-
+/*
   createCraterMap({
     containerId: "#nonmare-map",
     survivedData: survNon,
     erasedData: erasedNon,
     prefix: "nonmare"
-  });
+  }); */
 }).catch(err => {
   console.error("Error loading crater data:", err);
 });

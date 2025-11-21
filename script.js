@@ -28,6 +28,10 @@ Promise.all([
   d3.csv("data/survived_craters_mare.csv", parseCraterRow),
   d3.csv("data/erased_craters_mare.csv", parseCraterRow)
 ]).then(([survMare, erasedMare]) => {
+    console.log("Survived Mare CSV loaded:", survMare.length, "rows");
+    console.log("Erased Mare CSV loaded:", erasedMare.length, "rows");
+    console.log("First survived row:", survMare[0]);
+    console.log("First erased row:", erasedMare[0]);
 
   // Compute slider range from TimeStepCreated
   const allTimes = [...survMare, ...erasedMare].map(d => d.created);

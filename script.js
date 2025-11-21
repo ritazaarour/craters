@@ -84,7 +84,7 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
 
   //  
   svg.append("image")
-    .attr("href", "moon_180.jpg")
+    .attr("href", "moon.jpg")
     .attr("x", 0)
     .attr("y", 0)
     .attr("width", width)

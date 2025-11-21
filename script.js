@@ -14,12 +14,15 @@ const tooltip = d3.select("#tooltip");
 
 // Helper to parse crater rows
 function parseCraterRow(d) {
+  let lon = +d.Longitude;
+  if (lon > 180) lon = lon - 360;
+
   return {
-    lon: +d.Longitude,
+    lon,
     lat: +d.Latitude,
     diameter: +d.diameter,
     created: +d.TimeStepCreated,
-    survivedTime: +d.SurvivedTimeStep
+    survivedTime: d.SurvivedTimeStep ? +d.SurvivedTimeStep : null
   };
 }
 
@@ -79,7 +82,7 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
 
   //  
   svg.append("image")
-    .attr("href", "moon.jpg")
+    .attr("href", "/craters/moon.jpg")
     .attr("width", width)
     .attr("height", height)
     .attr("preserveAspectRatio", "xMidYMid slice");  

@@ -1,0 +1,141 @@
+body {
+  margin: 0;
+  background-color: #0d0d0d;  /* deep black/gray */
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #e5e5e5; /* light gray text */
+}
+
+header h1 {
+  text-align: center;
+  padding: 40px 0 20px;
+  font-size: 36px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.card {
+  width: 80%;
+  max-width: 1000px;
+  background: #1a1a1a; /* dark card */
+  margin: 30px auto 40px;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+  border: 1px solid #333;
+}
+
+.card h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.card-text {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 20px;
+  color: #cfcfcf;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+label {
+  color: #dcdcdc;
+}
+
+.slider-label input[type="range"] {
+  accent-color: #6aa6ff; /* slider thumb color */
+}
+
+/* MAP AREA */
+.map-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* SVG background */
+.moon-svg {
+  background-color: #121212; 
+  border-radius: 8px;
+  border: 1px solid #333;
+}
+
+.moon-sphere {
+  fill: #2a2a2a;   /* subtle dark gray Moon */
+  stroke: #444;
+  stroke-width: 1;
+}
+
+/* Lat/lon grid */
+.graticule {
+  fill: none;
+  stroke: #444;
+  stroke-width: 0.6;
+  opacity: 0.5;
+}
+
+.crater-survived {
+  fill: #4da6ff;      /* cool blue */
+  fill-opacity: 0.8;
+}
+
+.crater-erased {
+  fill: #ff7043;      /* warm orange */
+  fill-opacity: 0.85;
+}
+
+.crater-survived:hover,
+.crater-erased:hover {
+  stroke: #ffffff;
+  stroke-width: 1px;
+}
+
+/* Legend */
+.legend {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.legend-item {
+  margin: 0 12px;
+  font-size: 14px;
+  color: #e0e0e0;
+}
+
+.legend-color {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.legend-color.survived {
+  background-color: #4da6ff;
+}
+
+.legend-color.erased {
+  background-color: #ff7043;
+}
+
+.tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(20, 20, 20, 0.9);
+  border: 1px solid #555;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #f1f1f1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.65);
+}

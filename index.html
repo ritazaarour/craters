@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunar Crater Visualizations</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Lunar Cratering Over Time</h1>
+    </header>
+    
+    <section class="card">
+        <h2>Introduction</h2>
+        <p>
+        Our project analyzes how lunar craters survive or are erased over time in
+        different types of terrain. We focus on two major surface types:
+        <strong>mare</strong> (dark volcanic plains) and
+        <strong>non-mare</strong> highlands. Using simulated crater catalogs, we
+        distinguish between craters that <strong>survived</strong> to the end of
+        the model run and those that were <strong>erased</strong> by later
+        impacts or resurfacing. Our goal is to compare spatial patterns and size
+        distributions of craters in mare versus non-mare regions.
+        </p>
+    </section>
+    
+    <!-- Mare visualization -->
+     <section class="card">
+        <h2>Mare Regions: Survived vs. Erased Craters</h2>
+
+        <p class="card-text">
+        This view shows craters located in mare regions. Use the controls to
+        filter by crater type and minimum diameter. Hover over points to see
+        crater properties.
+        </p>
+        
+        <div class="controls">
+            <label>
+                <input type="checkbox" id="mare-show-survived" checked />
+                Survived
+            </label>
+            
+            <label>
+                <input type="checkbox" id="mare-show-erased" checked />
+                Erased
+            </label>
+            
+            <label class="slider-label">
+                Min diameter:
+                <input type="range" id="mare-diameter-slider" min="0" max="50" value="0" />
+                <span id="mare-diameter-value">0 km</span>
+            </label>
+        </div>
+        
+        <div id="mare-map" class="map-container"></div>
+        
+        <div class="legend">
+            <span class="legend-item">
+                <span class="legend-color survived"></span> Survived crater
+            </span>
+            <span class="legend-item">
+                <span class="legend-color erased"></span> Erased crater
+            </span>
+        </div>
+    </section>
+    
+    <!-- Non-mare visualization -->
+     
+    <section class="card">
+        <h2>Non-Mare Regions: Survived vs. Erased Craters</h2>
+
+        <p class="card-text">
+        This view shows craters in non-mare highlands. The same color scheme and
+        filters are used so you can compare patterns across surface types.
+        </p>
+        
+        <div class="controls">
+            
+            <label>
+                <input type="checkbox" id="nonmare-show-survived" checked />
+                Survived
+            </label>
+            
+            <label>
+                <input type="checkbox" id="nonmare-show-erased" checked />
+                Erased
+            </label>
+            
+            <label class="slider-label">
+                Min diameter:
+                <input type="range" id="nonmare-diameter-slider" min="0" max="50" value="0"/>
+                <span id="nonmare-diameter-value">0 km</span>
+            </label>
+        </div>
+   
+        <div id="nonmare-map" class="map-container"></div>
+    
+        <div class="legend">
+             <span class="legend-item">
+                <span class="legend-color survived"></span> Survived crater
+            </span>
+      
+            <span class="legend-item">
+                <span class="legend-color erased"></span> Erased crater
+            </span>
+        </div>
+    </section>
+   
+    <!-- Tooltip -->
+    <div id="tooltip" class="tooltip" style="opacity: 0;"></div>
+    <script src="script.js" defer></script>
+</body>
+</html>

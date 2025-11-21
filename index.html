@@ -47,7 +47,6 @@
                 Erased
             </label>
             
-            <!-- FIXED SLIDER -->
             <label class="slider-label">
                 Min timestep:
                 <input type="range" id="mare-timestep-slider" min="0" max="100" value="0" />
@@ -59,46 +58,6 @@
         
         <div class="legend">
             <span class="legend-item">
-                <span class="legend-color survived"></span> Survived crater
-            </span>
-            <span class="legend-item">
-                <span class="legend-color erased"></span> Erased crater
-            </span>
-        </div>
-    </section>
-    
-    <!-- Non-mare visualization -->
-    <section class="card">
-        <h2>Non-Mare Regions: Survived vs. Erased Craters</h2>
-
-        <p class="card-text">
-        This view shows craters in non-mare highlands. The same color scheme and
-        filters are used so you can compare patterns across surface types.
-        </p>
-        
-        <div class="controls">
-            
-            <label>
-                <input type="checkbox" id="nonmare-show-survived" checked />
-                Survived
-            </label>
-            
-            <label>
-                <input type="checkbox" id="nonmare-show-erased" checked />
-                Erased
-            </label>
-            
-            <label class="slider-label">
-                Min timestep:
-                <input type="range" id="mare-timestep-slider" min="0" max="100" value="0" />
-                <span id="mare-timestep-value">0</span>
-            </label>
-        </div>
-   
-        <div id="nonmare-map" class="map-container"></div>
-    
-        <div class="legend">
-             <span class="legend-item">
                 <span class="legend-color survived"></span> Survived crater
             </span>
             <span class="legend-item">

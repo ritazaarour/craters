@@ -79,7 +79,7 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
 
   //  
   svg.append("image")
-    .attr("href", "data/moon.jpg")
+    .attr("href", "moon.jpg")
     .attr("width", width)
     .attr("height", height)
     .attr("preserveAspectRatio", "xMidYMid slice");  
@@ -91,7 +91,7 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
     .attr("d", path);
 
     // geojson outline
-  d3.json("data/mare_region.geojson").then(region => {
+  d3.json("mare_region.geojson").then(region => {
     svg.append("path")
     .datum(region)
     .attr("class", "mare-outline")
@@ -147,6 +147,8 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
           .style("opacity", 1)
           .html(`
             <strong>Diameter:</strong> ${d.diameter.toFixed(2)} km<br/>
+            <strong>Lat:</strong> ${d.lat.toFixed(3)}°<br/>
+            <strong>Lon:</strong> ${d.lon.toFixed(3)}°<br/>
             <strong>Created timestep:</strong> ${d.created}<br/>
             <strong>Survived timestep:</strong> ${d.survivedTime}
           `);

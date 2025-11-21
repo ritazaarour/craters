@@ -75,7 +75,7 @@ label {
 }
 
 .moon-sphere {
-  fill: #2a2a2a;   /* subtle dark gray Moon */
+  fill: none;
   stroke: #444;
   stroke-width: 1;
 }

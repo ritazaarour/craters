@@ -82,7 +82,8 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
 
   //  
   svg.append("image")
-    .attr("href", "/craters/moon.jpg")
+    .attr("href", "moon.jpg")
+    .attr("xlink:href", "moon.jpg")
     .attr("width", width)
     .attr("height", height)
     .attr("preserveAspectRatio", "xMidYMid slice");  

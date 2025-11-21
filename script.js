@@ -4,6 +4,7 @@ const height = 400;
 
 // Equirectangular projection (works fine for lunar long/lat)
 const projection = d3.geoEquirectangular()
+  .rotate([0,0])
   .scale(width / (2 * Math.PI))
   .translate([width / 2, height / 2]);
 

@@ -91,7 +91,7 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
     .attr("d", path);
 
     // geojson outline
-  d3.json("mare_region.geojson").then(region => {
+  d3.json("mare_imbrium.geojson").then(region => {
     svg.append("path")
     .datum(region)
     .attr("class", "mare-outline")

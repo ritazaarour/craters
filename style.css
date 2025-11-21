@@ -55,6 +55,11 @@ label {
   accent-color: #6aa6ff; /* slider thumb color */
 }
 
+#mare-timestep-value {
+  color: #dcdcdc;
+  font-weight: 500;
+}
+
 /* MAP AREA */
 .map-container {
   display: flex;

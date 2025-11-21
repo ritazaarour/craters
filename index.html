@@ -27,12 +27,12 @@
     </section>
     
     <!-- Mare visualization -->
-     <section class="card">
+    <section class="card">
         <h2>Mare Regions: Survived vs. Erased Craters</h2>
 
         <p class="card-text">
         This view shows craters located in mare regions. Use the controls to
-        filter by crater type and minimum diameter. Hover over points to see
+        filter by crater type and minimum timestep. Hover over points to see
         crater properties.
         </p>
         
@@ -47,10 +47,11 @@
                 Erased
             </label>
             
+            <!-- FIXED SLIDER -->
             <label class="slider-label">
-                Min diameter:
-                <input type="range" id="mare-diameter-slider" min="0" max="50" value="0" />
-                <span id="mare-diameter-value">0 km</span>
+                Min timestep:
+                <input type="range" id="mare-timestep-slider" min="0" max="100" value="0" />
+                <span id="mare-timestep-value">0</span>
             </label>
         </div>
         
@@ -67,7 +68,6 @@
     </section>
     
     <!-- Non-mare visualization -->
-     
     <section class="card">
         <h2>Non-Mare Regions: Survived vs. Erased Craters</h2>
 
@@ -101,7 +101,6 @@
              <span class="legend-item">
                 <span class="legend-color survived"></span> Survived crater
             </span>
-      
             <span class="legend-item">
                 <span class="legend-color erased"></span> Erased crater
             </span>

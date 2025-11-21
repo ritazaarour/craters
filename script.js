@@ -28,20 +28,15 @@ Promise.all([
   d3.csv("data/survived_craters_mare.csv", parseCraterRow),
   d3.csv("data/erased_craters_mare.csv", parseCraterRow)
 ]).then(([survMare, erasedMare]) => {
-  // Compute global max diameter for slider range
-  const allDiameters = [
-    ...survMare,
-    ...erasedMare
-  ].map(d => d.diameter);
 
-  const maxDiameter = d3.max(allDiameters);
-  const roundedMax = Math.ceil(maxDiameter || 50);
+  // Compute slider range from TimeStepCreated
+  const allTimes = [...survMare, ...erasedMare].map(d => d.created);
+  const maxTime = d3.max(allTimes);
+  const roundedMax = Math.ceil(maxTime || 100);
 
-  // Initialize sliders with data-driven max
   setupSlider("mare", roundedMax);
-  setupSlider("nonmare", roundedMax);
 
-  // Create two separate maps
+  // Create Mare map
   createCraterMap({
     containerId: "#mare-map",
     survivedData: survMare,
@@ -61,15 +56,15 @@ Promise.all([
 
 // Configure a slider's max/value + label
 function setupSlider(prefix, maxVal) {
-  const slider = document.getElementById(`${prefix}-diameter-slider`);
-  const label = document.getElementById(`${prefix}-diameter-value`);
+  const slider = document.getElementById(`${prefix}-timestep-slider`);
+  const label = document.getElementById(`${prefix}-timestep-value`);
 
   if (slider) {
     slider.max = maxVal;
     slider.value = 0;
   }
   if (label) {
-    label.textContent = "0 km";
+    label.textContent = "0";
   }
 }
 
@@ -104,37 +99,27 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
 
   // Update function: filter and redraw
   function update() {
-    const showSurvived = showSurvivedInput ? showSurvivedInput.checked : true;
-    const showErased = showErasedInput ? showErasedInput.checked : true;
-    const minDiameter = slider ? +slider.value : 0;
+    const showSurvived = showSurvivedInput.checked;
+    const showErased = showErasedInput.checked;
+    const minTime = +slider.value;
 
-    if (sliderLabel) {
-      sliderLabel.textContent = `${minDiameter} km`;
-    }
+    sliderLabel.textContent = minTime;
 
-    // Build filtered dataset
     let filtered = [];
 
     if (showSurvived) {
-      filtered = filtered.concat(
-        survivedData.filter(d => d.diameter >= minDiameter)
-      );
+      filtered.push(...survivedData.filter(d => d.created >= minTime));
     }
     if (showErased) {
-      filtered = filtered.concat(
-        erasedData.filter(d => d.diameter >= minDiameter)
-      );
+      filtered.push(...erasedData.filter(d => d.created >= minTime));
     }
 
-    // JOIN
-    const circles = craterGroup.selectAll("circle").data(filtered, d => d.id || `${d.lon},${d.lat},${d.diameter}`);
+    const circles = craterGroup.selectAll("circle")
+      .data(filtered, d => `${d.lon},${d.lat},${d.diameter}`);
 
-    // EXIT
     circles.exit().remove();
 
-    // ENTER + UPDATE
-    circles
-      .enter()
+    circles.enter()
       .append("circle")
       .merge(circles)
       .attr("cx", d => projection([d.lon, d.lat])[0])
@@ -146,42 +131,32 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
       .on("mouseover", (event, d) => {
         tooltip
           .style("opacity", 1)
-          .html(
-            `<strong>Diameter:</strong> ${d.diameter.toFixed(2)} km<br/>
-             <strong>Created timestep:</strong> ${d.created}<br/>
-             <strong>Survived timestep:</strong> ${d.survivedTime}`
-          );
+          .html(`
+            <strong>Diameter:</strong> ${d.diameter.toFixed(2)} km<br/>
+            <strong>Created timestep:</strong> ${d.created}<br/>
+            <strong>Survived timestep:</strong> ${d.survivedTime}
+          `);
       })
       .on("mousemove", event => {
         tooltip
-          .style("left", event.pageX + 10 + "px")
-          .style("top", event.pageY + 10 + "px");
+          .style("left", event.pageX + 12 + "px")
+          .style("top", event.pageY + 12 + "px");
       })
-      .on("mouseout", () => {
-        tooltip.style("opacity", 0);
-      });
+      .on("mouseout", () => tooltip.style("opacity", 0));
   }
 
-  // Attach UI listeners
-  if (showSurvivedInput) {
-    showSurvivedInput.addEventListener("change", update);
-  }
-  if (showErasedInput) {
-    showErasedInput.addEventListener("change", update);
-  }
-  if (slider) {
-    slider.addEventListener("input", update);
-  }
+  // Add listeners
+  showSurvivedInput.addEventListener("change", update);
+  showErasedInput.addEventListener("change", update);
+  slider.addEventListener("input", update);
 
   // Initial draw
   update();
 }
 
-// Simple radius scale (tweak as needed)
+ // Crater radius scale
 function craterRadius(diameter) {
-  // Avoid huge circles; square-root scale feels better
   const minR = 1;
   const maxR = 8;
-  // You can tune 100 here based on your actual max
   return Math.max(minR, Math.min(maxR, Math.sqrt(diameter) * 0.8));
 }

@@ -77,13 +77,28 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
     .attr("width", width)
     .attr("height", height);
 
+  //  
+  svg.append("image")
+    .attr("href", "data/moon.jpg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("preserveAspectRatio", "xMidYMid slice");  
+
   // Draw a "sphere" representing the Moon
   svg.append("path")
     .datum({ type: "Sphere" })
     .attr("class", "moon-sphere")
     .attr("d", path);
 
-  // Optional graticule (lat/long grid)
+    // geojson outline
+  d3.json("data/mare_region.geojson").then(region => {
+    svg.append("path")
+    .datum(region)
+    .attr("class", "mare-outline")
+    .attr("d", path);
+  });
+
+  // gridlines
   const graticule = d3.geoGraticule();
   svg.append("path")
     .datum(graticule())
@@ -153,6 +168,22 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
     update();
 });
 
+  update();
+
+  const zoom = d3.zoom()
+    .scaleExtent([1, 8]) // zoom limits
+    .on("zoom", (event) => {
+
+      craterGroup.attr("transform", event.transform);
+
+      svg.selectAll(".mare-outline").attr("transform", event.transform);
+
+      svg.selectAll(".graticule").attr("transform", event.transform);
+
+      svg.selectAll("image").attr("transform", event.transform);
+    });
+
+  svg.call(zoom);
 }
 
  // Crater radius scale

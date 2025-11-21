@@ -104,8 +104,6 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
     const showErased = showErasedInput.checked;
     const minTime = +slider.value;
 
-    sliderLabel.textContent = minTime;
-
     let filtered = [];
 
     if (showSurvived) {
@@ -149,10 +147,10 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
   // Add listeners
   showSurvivedInput.addEventListener("change", update);
   showErasedInput.addEventListener("change", update);
-  slider.addEventListener("input", update);
-
-  // Initial draw
-  update();
+  slider.addEventListener("input", () => {
+    sliderLabel.textContent = slider.value;
+    
+    update();
 }
 
  // Crater radius scale

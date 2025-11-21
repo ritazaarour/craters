@@ -151,6 +151,8 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
     sliderLabel.textContent = slider.value;
     
     update();
+});
+
 }
 
  // Crater radius scale

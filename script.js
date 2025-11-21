@@ -82,11 +82,12 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
 
   //  
   svg.append("image")
-    .attr("href", "moon.jpg")
-    .attr("xlink:href", "moon.jpg")
+    .attr("href", "moon_180.jpg")
+    .attr("x", 0)
+    .attr("y", 0)
     .attr("width", width)
     .attr("height", height)
-    .attr("preserveAspectRatio", "xMidYMid slice");  
+    .attr("preserveAspectRatio", "none"); 
 
   // Draw a "sphere" representing the Moon
   svg.append("path")

@@ -95,22 +95,6 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
     .attr("class", "moon-sphere")
     .attr("d", path);
 
-    // geojson outline
-  d3.json("mare_imbrium.geojson").then(region => {
-    const feature = region.features ? region.features[0] : region;
-    
-    feature.geometry.coordinates[0] =
-    feature.geometry.coordinates[0].map(([lon, lat]) => {
-      if (lon > 180) lon = lon - 360;   // correct transform
-      return [lon, lat];
-    });
-
-    svg.append("path")
-      .datum(feature)
-      .attr("class", "mare-outline")
-      .attr("d", path);
-  });
-
   // gridlines
   const graticule = d3.geoGraticule();
   svg.append("path")

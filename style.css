@@ -80,12 +80,6 @@ label {
   stroke-width: 1;
 }
 
-.mare-outline {
-  fill: rgba(0, 0, 80, 0.3);
-  stroke: #2a5cff;
-  stroke-width: 2;
-}
-
 /* Lat/lon grid */
 .graticule {
   fill: none;

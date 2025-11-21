@@ -28,10 +28,6 @@ Promise.all([
   d3.csv("data/survived_craters_mare.csv", parseCraterRow),
   d3.csv("data/erased_craters_mare.csv", parseCraterRow)
 ]).then(([survMare, erasedMare]) => {
-    console.log("Survived Mare CSV loaded:", survMare.length, "rows");
-    console.log("Erased Mare CSV loaded:", erasedMare.length, "rows");
-    console.log("First survived row:", survMare[0]);
-    console.log("First erased row:", erasedMare[0]);
 
   // Compute slider range from TimeStepCreated
   const allTimes = [...survMare, ...erasedMare].map(d => d.created);
@@ -98,8 +94,9 @@ function createCraterMap({ containerId, survivedData, erasedData, prefix }) {
 
   const showSurvivedInput = document.getElementById(`${prefix}-show-survived`);
   const showErasedInput = document.getElementById(`${prefix}-show-erased`);
-  const slider = document.getElementById(`${prefix}-diameter-slider`);
-  const sliderLabel = document.getElementById(`${prefix}-diameter-value`);
+  const slider = document.getElementById(`${prefix}-timestep-slider`);
+  const sliderLabel = document.getElementById(`${prefix}-timestep-value`);
+
 
   // Update function: filter and redraw
   function update() {
